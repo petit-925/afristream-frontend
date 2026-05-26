@@ -1,0 +1,4 @@
+[7/25/2025, 2:46:55 PM] layer "afristreamgh1@gmail.com": Unsupported extension: com
+[7/25/2025, 2:46:56 PM] layer "www.afristreamgh.com": Unsupported extension: com
+[7/25/2025, 2:46:56 PM] layer "+233 243 49 56 16": Expected Either a default asset specification or a layer asset specification but "+" found.
+[7/25/2025, 2:46:56 PM] layer "BSc.ICT Education": Expected end of input but "E" found.
