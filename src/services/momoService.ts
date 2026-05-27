@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '../config/api';
+
 export interface MomoInitiateParams {
   phone: string;
   email: string;
@@ -13,8 +15,7 @@ class MomoService {
   }
 
   async initiatePayment(params: MomoInitiateParams): Promise<any> {
-    const base = import.meta.env.VITE_API_URL as string;
-    const res = await fetch(`${base}/payments/momo/initiate`, {
+    const res = await fetch(`${API_BASE_URL}/payments/momo/initiate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,8 +33,7 @@ class MomoService {
   }
 
   async verifyPayment(reference: string): Promise<any> {
-    const base = import.meta.env.VITE_API_URL as string;
-    const res = await fetch(`${base}/payments/momo/verify/${encodeURIComponent(reference)}`, {
+    const res = await fetch(`${API_BASE_URL}/payments/momo/verify/${encodeURIComponent(reference)}`, {
       headers: {
         'Content-Type': 'application/json',
         ...(typeof window !== 'undefined' && localStorage.getItem('token')

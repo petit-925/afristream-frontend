@@ -1,4 +1,5 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL as string;
+export { API_BASE_URL, UPLOADS_BASE_URL } from '../config/api';
+import { API_BASE_URL } from '../config/api';
 
 export async function apiClient(path: string, options: RequestInit = {}) {
   const url = `${API_BASE_URL}${path}`;
@@ -18,5 +19,3 @@ export function normalizeUploadUrl(raw?: string) {
   if (!raw) return '';
   return String(raw).replace(/\\/g, '/').replace(/\/api\/v\d+\//i, '/');
 }
-
-

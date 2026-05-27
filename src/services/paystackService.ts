@@ -1,4 +1,5 @@
 import PaystackPop from '@paystack/inline-js';
+import { API_BASE_URL } from '../config/api';
 
 export interface PaystackConfig {
   key: string;
@@ -53,8 +54,7 @@ class PaystackService {
    * Verify payment on the backend
    */
   async verifyPayment(reference: string): Promise<any> {
-    const base = import.meta.env.VITE_API_URL as string;
-    const res = await fetch(`${base}/payments/verify/${encodeURIComponent(reference)}`, {
+    const res = await fetch(`${API_BASE_URL}/payments/verify/${encodeURIComponent(reference)}`, {
       headers: {
         'Content-Type': 'application/json',
         ...(typeof window !== 'undefined' && localStorage.getItem('token')

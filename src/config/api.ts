@@ -1,9 +1,20 @@
-// API Configuration
-// IMPORTANT: Set VITE_API_URL in your .env file to match your backend address (e.g., http://localhost:5000/api/v1)
+// API Configuration — set VITE_API_URL (and optionally VITE_UPLOADS_URL) in .env
 export const API_BASE_URL = import.meta.env.VITE_API_URL as string;
-export const UPLOADS_BASE_URL = import.meta.env.VITE_UPLOADS_URL || 'http://localhost:5000/uploads';
+
+const resolveApiOrigin = (): string => {
+  if (!API_BASE_URL) return '';
+  try {
+    return new URL(API_BASE_URL).origin;
+  } catch {
+    return API_BASE_URL.replace(/\/api(\/.*)?$/, '');
+  }
+};
+
+export const API_ORIGIN = resolveApiOrigin();
+export const UPLOADS_BASE_URL =
+  (import.meta.env.VITE_UPLOADS_URL as string | undefined) || `${API_ORIGIN}/uploads`;
+export const API_HOST = API_ORIGIN;
 export const API_FALLBACK_URL = import.meta.env.VITE_API_URL_FALLBACK || '';
-export const API_HOST = API_BASE_URL.replace(/\/api(\/.*)?$/,'');
 
 export const API_ENDPOINTS = {
   // Auth
@@ -101,4 +112,4 @@ export const apiRequest = async (endpoint: string, options: RequestInit = {}) =>
   }
 };
 
-export default API_ENDPOINTS; 
+export default API_ENDPOINTS;
